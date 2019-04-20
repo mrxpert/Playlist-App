@@ -21,3 +21,7 @@ connection.connect((err) => {
   if (err) throw err;
   console.log('[OK] DB is connected');
 });
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
