@@ -13,3 +13,4 @@ app.listen(app.get('port'), () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
+app.use('/genres', require('./routes/genres'));
