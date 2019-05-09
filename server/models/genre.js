@@ -1,10 +1,14 @@
 const db = require('../db');
 
-exports.getAll = (done) => {
+exports.getAll = () => {
   const queryString = 'SELECT * FROM `Genres`';
-  db.query(queryString, (err, rows) => {
-    if (err)
-      return done(err);
-    done(null, rows);
-  })
-}
+
+  return new Promise((resolve, reject) => {  db.query(queryString, (err, rows) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(rows);
+      }
+    })
+  });
+};
