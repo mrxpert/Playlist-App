@@ -7,4 +7,7 @@ const genre_controller = require('../controllers/genreController');
 // GET request for list of all Genre items.
 router.get('/', genre_controller.genre_list);
 
+// GET request for one certain Genre.
+router.get('/:id', genre_controller.genre_detail);
+
 module.exports = router;

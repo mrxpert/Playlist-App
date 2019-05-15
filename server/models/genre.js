@@ -12,3 +12,17 @@ exports.getAll = () => {
     })
   });
 };
+
+exports.getDetail = (genre_id) => {
+  const queryString = 'SELECT * FROM `Genres` WHERE genre_id = "' + genre_id + '" ';
+  
+  return new Promise((resolve, reject) => {
+    db.query(queryString, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    })
+  })
+}

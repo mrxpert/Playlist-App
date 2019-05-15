@@ -7,3 +7,11 @@ exports.genre_list = async (req, res) => {
     console.error(`something failed: ${err}`);
   }
 };
+
+exports.genre_detail = async (req, res) => {
+  try {
+    res.json(await Genre.getDetail(req.params.id));
+  } catch(err) {
+    console.error(`something failed: ${err}`);
+  }
+}
