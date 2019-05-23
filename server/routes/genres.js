@@ -10,4 +10,7 @@ router.get('/', genre_controller.genre_list);
 // GET request for one certain Genre.
 router.get('/:id', genre_controller.genre_detail);
 
+// DELETE request for one certain Genre 
+router.delete('/:id', genre_controller.genre_delete);
+
 module.exports = router;

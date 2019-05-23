@@ -26,3 +26,17 @@ exports.getDetail = (genre_id) => {
     })
   })
 }
+
+exports.deleteGenre = (genre_id) => {
+  const queryString = 'DELETE FROM `Genres` WHERE genre_id = "' + genre_id + '" ';
+  
+  return new Promise((resolve, reject) => {
+    db.query(queryString, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve('SUCCESSFULLY DELETED!');
+      }
+    })
+  })
+}

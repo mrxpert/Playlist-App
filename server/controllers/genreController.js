@@ -15,3 +15,11 @@ exports.genre_detail = async (req, res) => {
     console.error(`something failed: ${err}`);
   }
 }
+
+exports.genre_delete = async (req, res) => {
+  try {
+    res.send(await Genre.deleteGenre(req.params.id));
+  } catch(err) {
+    console.error(`something failed: ${err}`);
+  }
+}
