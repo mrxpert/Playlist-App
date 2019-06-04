@@ -16,4 +16,7 @@ router.delete('/:id', genre_controller.genre_delete);
 // POST request for creating new Genre 
 router.post('/add', genre_controller.genre_add);
 
+// POST request for editing existing Genre
+router.post('/edit/:id', genre_controller.genre_edit);
+
 module.exports = router;

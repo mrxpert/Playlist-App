@@ -54,3 +54,17 @@ exports.addGenre = (genre_name) => {
     })
   })
 }
+
+exports.editGenre = (genre_id, genre_name) => {
+  const queryString = 'UPDATE `Genres` SET genre_name = "' + genre_name + '" WHERE genre_id = "' + genre_id + '"';
+  
+  return new Promise((resolve, reject) => {
+    db.query(queryString, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row)
+      }
+    })
+  })
+}

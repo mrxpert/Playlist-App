@@ -31,3 +31,11 @@ exports.genre_add = async (req, res) => {
     console.error(`something failed with adding new genre: ${err}`);
   }
 }
+
+exports.genre_edit = async (req, res) => {
+  try {
+    res.json(await Genre.editGenre(req.params.id, req.body.genre_name));
+  } catch(err) {
+    console.error(`something failed with editing genre: ${err}`);
+  }
+}
