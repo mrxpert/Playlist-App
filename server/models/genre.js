@@ -40,3 +40,17 @@ exports.deleteGenre = (genre_id) => {
     })
   })
 }
+
+exports.addGenre = (genre_name) => {
+  const queryString = 'INSERT INTO `Genres` (genre_name) VALUES ("' + genre_name + '")';
+  
+  return new Promise((resolve, reject) => {
+    db.query(queryString, (err, row) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(row);
+      }
+    })
+  })
+}

@@ -23,3 +23,11 @@ exports.genre_delete = async (req, res) => {
     console.error(`something failed: ${err}`);
   }
 }
+
+exports.genre_add = async (req, res) => {
+  try {
+    res.json(await Genre.addGenre(req.body.genre_name));
+  } catch(err) {
+    console.error(`something failed with adding new genre: ${err}`);
+  }
+}
