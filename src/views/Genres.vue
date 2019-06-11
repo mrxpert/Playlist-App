@@ -9,6 +9,7 @@
             <md-table-head md-numeric>#</md-table-head>
             <md-table-head md-numeric>Name</md-table-head>
             <md-table-head md-numeric>id</md-table-head>
+            <md-table-head md-numeric>Actions</md-table-head>
           </md-table-row>
         </md-table-header>
         <md-table-body>
@@ -16,6 +17,10 @@
             <md-table-cell md-numeric>{{ count+1 }}</md-table-cell>
             <md-table-cell md-numeric>{{ genre.genre_name }}</md-table-cell>
             <md-table-cell md-numeric>{{ genre.genre_id}}</md-table-cell>
+            <md-table-cell class="action-buttons">
+              <md-button class="md-raised md-primary">Edit</md-button>
+              <md-button class="md-raised md-accent">Delete</md-button>
+            </md-table-cell>
           </md-table-row>
         </md-table-body>
       </md-table>
@@ -68,6 +73,20 @@
   
   .md-table-head-container {
     text-align: center;
+  }
+  
+  .md-table-cell.action-buttons {
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Table buttons styles */
+  .md-button.md-raised.md-primary {
+    width: inherit;
+  }
+  
+  .md-button.md-raised.md-accent {
+    width: inherit;
   }
   
 </style>
