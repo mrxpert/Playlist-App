@@ -3,35 +3,29 @@
     <h1>Genres in your Playlist</h1>
     
     <div class="list-wrapper" v-if="!isError">
-      <md-table>
-        <md-table-header>
-          <md-table-row>
-            <md-table-head md-numeric>#</md-table-head>
-            <md-table-head md-numeric>Name</md-table-head>
-            <md-table-head md-numeric>id</md-table-head>
-            <md-table-head md-numeric>Actions</md-table-head>
-          </md-table-row>
-        </md-table-header>
-        <md-table-body>
-          <md-table-row v-for="(genre, count) in genresList" :key="genre._id">
-            <md-table-cell md-numeric>{{ count+1 }}</md-table-cell>
-            <md-table-cell md-numeric>{{ genre.genre_name }}</md-table-cell>
-            <md-table-cell md-numeric>{{ genre.genre_id}}</md-table-cell>
-            <md-table-cell class="action-buttons">
-              <md-button class="md-raised md-primary">Edit</md-button>
-              <md-button class="md-raised md-accent">Delete</md-button>
-            </md-table-cell>
-          </md-table-row>
-        </md-table-body>
-      </md-table>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th class="id-column">ID</th>
+            <th class="action-column">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="genre in genresList" :key="genre._id">
+            <td>{{ genre.genre_name }}</td>
+            <td>{{ genre.genre_id }}</td>
+            <td>
+              <button class="action-buttons">Edit</button>
+              <button class="action-buttons">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     
     <div class="error-block" v-else>
-      <md-card class="md-varn">
-        <md-card-content>
-          <h2 class="error-view">Data Base Error</h2>
-        </md-card-content>
-      </md-card>
+      <h2 class="error-view">Data Base Error</h2>
     </div>
     
   </div>
@@ -67,26 +61,53 @@
   .list-wrapper {
     width: 70%;
     max-height: 70vh;
-    background-color: #42b983;
+    margin: 10px auto;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 400px;
+    border: 3px solid #44475C;
+    border-collapse: collapse;
     margin: 10px auto;
   }
   
-  .md-table-head-container {
-    text-align: center;
+  .id-column {
+    width: 20%;
   }
   
-  .md-table-cell.action-buttons {
-    display: flex;
-    justify-content: center;
+  .action-column {
+    width: 25%;
   }
   
-  /* Table buttons styles */
-  .md-button.md-raised.md-primary {
-    width: inherit;
+  table th {
+    padding: 8px;
+    background-color: #44475C;
+    color: white;
+    cursor: pointer;
   }
   
-  .md-button.md-raised.md-accent {
-    width: inherit;
+  table th:hover {
+    background-color: #4c7d8b;
+  }
+  
+  td {
+    padding: 8px 0px;
+    background-color: #42b983;
+    border-right: 2px solid #44475C;
+  }
+  
+  tr:nth-child(2n) td {
+    background-color: white;
+  }
+  
+  tr:hover td {
+    color: white;
+    background-color: #4c7d8b;
+  }
+  
+  .action-buttons {
+    cursor: pointer;
   }
   
 </style>
