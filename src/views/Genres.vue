@@ -6,8 +6,8 @@
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th class="id-column">ID</th>
+            <th v-on:click="sortTable(columns[1])">Name</th>
+            <th class="id-column" v-on:click="sortTable(columns[0])">ID</th>
             <th class="action-column">Actions</th>
           </tr>
         </thead>
@@ -39,6 +39,7 @@
     data() {
       return {
         genresList: [],
+        ascendingOrder: true,
         isError: false
       };
     },
@@ -52,6 +53,28 @@
         console.log(err);
         this.isError = true;
       });
+    },
+    methods: {
+      "sortTable": function sortTable(col) {
+        let ascending = this.ascendingOrder;
+        
+        this.genresList.sort((a, b) => {
+
+          if (a[col] < b[col]) 
+            return ascending ? -1 : 1;
+          if (a[col] > b[col]) 
+            return ascending ? 1 : -1;
+          return 0;
+          
+        })
+        
+        this.ascendingOrder = !ascending;
+      },
+    },
+    computed: {
+      "columns": function columns() {
+        return Object.keys(this.genresList[0]);
+      }
     }
   }
 </script>
