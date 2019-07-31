@@ -12,12 +12,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="genre in genresList" :key="genre._id">
+          <tr v-for="(genre, genreTableIndex) in genresList" :key="genre._id">
             <td>{{ genre.genre_name }}</td>
             <td>{{ genre.genre_id }}</td>
             <td>
               <button class="action-buttons">Edit</button>
-              <button class="action-buttons">Delete</button>
+              <button v-on:click="deleteGenre(genre.genre_id, genreTableIndex)" class="action-buttons">Delete</button>
             </td>
           </tr>
         </tbody>
@@ -70,6 +70,15 @@
         
         this.ascendingOrder = !ascending;
       },
+      "deleteGenre": async function deleteGenre(genreId, row) {
+          try {
+            const response = await axios.delete('http://localhost:4000/genres/' + genreId);
+            console.log(response);
+            this.genresList.splice(row, 1);
+          } catch (error) {
+            console.log(error);
+          }
+      }
     },
     computed: {
       "columns": function columns() {
