@@ -92,7 +92,6 @@
 
   .list-wrapper {
     width: 70%;
-    max-height: 70vh;
     margin: 10px auto;
     overflow-x: auto;
   }
