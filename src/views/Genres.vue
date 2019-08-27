@@ -52,16 +52,13 @@
       v-show="isModalVisible"
       v-on:close="deleteGenreCancel"
     >
-      <template v-slot:header>
-        Delete genre?
+      <template v-slot:header class="modal-header">
+        Are You shure?
       </template>
       
       <template v-slot:body>
-        <strong>Do you really want to delete {{ genreToDelete }} from table?</strong>
-      </template>
-      
-      <template v-slot:footer>
-        No!
+        <strong class="modal-body-statement">Do you really want to delete <span class=" modal-body-alert">{{ genreToDelete.genre_name }}</span>?</strong>
+        <button v-on:click="deleteGenreConfirmed(genreToDelete.genre_id, genreToDeleteRow)">Delete!</button>
       </template>
 
     </modal>
@@ -91,6 +88,7 @@
         isError: false,
         isModalVisible: false,
         genreToDelete: '',
+        genreToDeleteRow: null,
       };
     },
     mounted() {
@@ -122,7 +120,8 @@
       },
       "deleteGenre": function deleteGenre(genre, row) {
         this.isModalVisible = true;
-        this.genreToDelete = genre.genre_name;
+        this.genreToDelete = genre;
+        this.genreToDeleteRow = row;
       },
       "deleteGenreCancel": function deleteGenreCancel() {
         this.isModalVisible = false;
@@ -132,6 +131,7 @@
             const response = await axios.delete('http://localhost:4000/genres/' + genreId);
             console.log(response);
             this.genresList.splice(row, 1);
+            this.isModalVisible = false;
           } catch (error) {
             console.log(error);
           }
@@ -196,6 +196,18 @@
   
   .action-buttons {
     cursor: pointer;
+  }
+  
+  .modal-header {
+    justify-content: center;
+  }
+  
+  .modal-body-statement {
+    display: block;
+  }
+  
+  .modal-body-alert {
+    color: orangered;
   }
   
 </style>
