@@ -17,30 +17,80 @@
             <td>{{ genre.genre_id }}</td>
             <td>
               <button class="action-buttons">Edit</button>
-              <button v-on:click="deleteGenre(genre.genre_id, genreTableIndex)" class="action-buttons">Delete</button>
+              <button v-on:click="deleteGenre(genre, genreTableIndex)" class="action-buttons">Delete</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     
+<!--
+    <div class="list-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th v-on:click="sortTable(columns[1])">Name</th>
+            <th class="id-column" v-on:click="sortTable(columns[0])">ID</th>
+            <th class="action-column">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Genre Name</td>
+            <td>Genre ID</td>
+            <td>
+              <button class="action-buttons">Edit</button>
+              <button v-on:click="deleteGenre(1, 1)" class="action-buttons">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+-->
+    
+    <modal
+      v-show="isModalVisible"
+      v-on:close="deleteGenreCancel"
+    >
+      <template v-slot:header>
+        Delete genre?
+      </template>
+      
+      <template v-slot:body>
+        <strong>Do you really want to delete {{ genreToDelete }} from table?</strong>
+      </template>
+      
+      <template v-slot:footer>
+        No!
+      </template>
+
+    </modal>
+    
+<!--
     <div class="error-block" v-else>
       <h2 class="error-view">Data Base Error</h2>
     </div>
+-->
     
   </div>
 </template>
 
 <script>
   import axios from 'axios';
+  import modal from '../components/modal.vue'
   
   export default {
     name: 'genres',
+    components: {
+      modal,
+    },
     data() {
       return {
         genresList: [],
         ascendingOrder: true,
-        isError: false
+        isError: false,
+        isModalVisible: false,
+        genreToDelete: '',
       };
     },
     mounted() {
@@ -70,7 +120,14 @@
         
         this.ascendingOrder = !ascending;
       },
-      "deleteGenre": async function deleteGenre(genreId, row) {
+      "deleteGenre": function deleteGenre(genre, row) {
+        this.isModalVisible = true;
+        this.genreToDelete = genre.genre_name;
+      },
+      "deleteGenreCancel": function deleteGenreCancel() {
+        this.isModalVisible = false;
+      },
+      "deleteGenreConfirmed": async function deleteGenreConfirmed(genreId, row) {
           try {
             const response = await axios.delete('http://localhost:4000/genres/' + genreId);
             console.log(response);
@@ -78,7 +135,7 @@
           } catch (error) {
             console.log(error);
           }
-      }
+      },
     },
     computed: {
       "columns": function columns() {
