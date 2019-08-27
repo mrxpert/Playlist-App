@@ -1,13 +1,24 @@
 # playlist-app
+## Simple app represents database of Songs.
 
-## Project setup
+Work is in progress:
+
+- [x] Table of items
+- [x] Table sort
+- [x] Delete func
+- [x] Modal
+- [ ] Ability to add new items
+- [ ] Ability to edit items 
+- [ ] Search
+- [ ] Infinite Scroll
+- [ ] Connect all tables
+- [ ] Mobile friendly
+
+**To try app on your local machine by downloading _Develop Branch!_**
+
+### Project setup
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
 ```
 
 ### Compiles and minifies for production
@@ -15,12 +26,9 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
+### Run app
 ```
-npm run test
+node server/server.js
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+### And go to (http://localhost:4000/#/genres)
